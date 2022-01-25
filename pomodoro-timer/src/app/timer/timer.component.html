@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-4"></div>
+        <div class="col-xs-4 text-center">
+            <h1>TIME</h1>
+        </div>
+        <div class="col-xs-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4"></div>
+        <div class="col-xs-4 text-center">
+            <h1>{{minutes_minutes | number:'2.0'}}:{{minutes_seconds | number:'2.0'}}</h1>
+        </div>
+        <div class="col-xs-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-2"></div>
+        <div class="col-xs-2">
+            <button class="btn btn-primary btn-block" (click)="onStart()">
+                Start
+            </button>
+        </div>
+        <div class="col-xs-2">
+            <button class="btn btn-danger btn-block" (click)="onStop()">
+                Stop
+            </button>
+        </div>
+        <div class="col-xs-2"></div>
+        <div class="col-xs-2"></div>
+    </div>
+    <div class="row" style="padding: 10px;">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-2"></div>
+        <div class="col-xs-2">
+            <input type="number" class="form-control" [(ngModel)]="initialSetTime">
+        </div>
+        <div class="col-xs-2">
+            <button class="btn btn-primary btn-block set_time" (click)="onSetTime()">Set Time! (minutes)</button>
+        </div>
+        <div class="col-xs-2"></div>
+        <div class="col-xs-2"></div>
+    </div>
+</div>
