@@ -134,7 +134,10 @@ export class TimerComponent implements OnInit, DoCheck{
 
   onChangePenaultyCheckbox(event) {
     this.usePenaultyTime = event.checked;
-    if(!this.usePenaultyTime) clearInterval(this.penaltyTimer);
+    if(!this.usePenaultyTime) {
+      clearInterval(this.penaltyTimer);
+      this.penalty = 0;
+    }
   }
 
   //TODO: Implement a max limit on penalty, otherwise it might go beyond 99 minutes
