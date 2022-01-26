@@ -18,6 +18,13 @@
             <p [ngStyle]="{'font-size': paragraphFontSize}">{{minutes_minutes | number:'2.0'}}:{{minutes_seconds | number:'2.0'}}</p>
         </div>
     </div>
+    <div class="row" style="padding: 10px;">
+        <div class="col-xs-12 text-center">
+            <mat-checkbox (change)="onChangePenaultyCheckbox($event)" [checked]="usePenaultyTime">
+                Use penalty timer
+            </mat-checkbox>
+        </div>
+    </div>
     <div class="row">
         <div class="col-xs-2"></div>
         <div class="col-xs-2"></div>

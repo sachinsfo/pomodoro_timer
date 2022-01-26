@@ -1,5 +1,5 @@
-enum TimerType {
-    Regular = 1,
+export enum TimerType {
+    Regular,
     ShortBreak,
     LongBreak
 }

@@ -1,9 +1,9 @@
 export class TimerObj {
-    public type: string;
-    public value: number;
+    public type: number;
+    public time_in_min: number;
 
-    constructor(type: string, value: number){
+    constructor(type: number, time_in_min: number){
         this.type= type;
-        this.value = value;
+        this.time_in_min= time_in_min;
     }
 }

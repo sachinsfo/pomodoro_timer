@@ -7,6 +7,7 @@ import { TimerComponent } from './timer/timer.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSliderModule } from '@angular/material/slider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { MatSliderModule } from '@angular/material/slider';
     FormsModule,
     NoopAnimationsModule,
     MatSliderModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
