@@ -1,6 +1,6 @@
 import { Component, DoCheck, ElementRef, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { TimerObj } from '../shared/timer.model';
-import { TimerType } from '../shared/enums/timertype.enum';
+import { TimerTypeEnum } from '../shared/enums/timertype.enum';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 @Component({
   selector: 'app-timer',
@@ -11,7 +11,8 @@ export class TimerComponent implements OnInit, DoCheck{
   timer;
   penalty: number = 0;
   penaltyTimer;
-  usePenaultyTime: boolean = false;
+  chkboxPenaltyTime: boolean = false;
+  chkboxAutoTimer: boolean = true;
 
   @ViewChild('initialSetTime', {static: true})
   initialSetTimeMinutes: number = 25;
@@ -34,9 +35,10 @@ export class TimerComponent implements OnInit, DoCheck{
   constructor() { }
 
   ngOnInit(): void {
+    //TODO Calculate efficiency of the activity whenever penalty is used
     //this.timer_list.push({type: TimerType.Regular, time_in_min: 0.3});
-    this.timer_list.push({type: TimerType.Regular, time_in_min: 0.2});
-    this.timer_list.push({type: TimerType.Regular, time_in_min: 0.2});
+    this.timer_list.push({type: TimerTypeEnum.Regular, time_in_min: 0.1});
+    this.timer_list.push({type: TimerTypeEnum.Regular, time_in_min: 0.2});
     console.log(this.timer_list)
   }
 
@@ -90,9 +92,17 @@ export class TimerComponent implements OnInit, DoCheck{
 
   onComplete() {
     clearInterval(this.timer);
-    this.current_time_seconds = 0;
+    //this.current_time_seconds = 0;
+    console.log(this.chkboxAutoTimer, this.current_time_seconds, this.timer_list)
     this.penalty = 0;
-    this.onStart();
+    if(this.chkboxAutoTimer){
+      this.onStart();
+    }
+    //when all timers are exhausted
+    if(this.current_time_seconds === 0){
+      this.stopButton.nativeElement.disabled = true;
+      this.startButton.nativeElement.disabled = false;
+    }
   }
 
   onStop() {
@@ -102,7 +112,7 @@ export class TimerComponent implements OnInit, DoCheck{
       this.stopButton.nativeElement.disabled = true;
       this.startButton.nativeElement.disabled = false;
       // reset the penalty to 1 each time the stop button is clicked
-      if(this.usePenaultyTime){
+      if(this.chkboxPenaltyTime){
         this.penalty = 1;
         this.penaltyTimer = setInterval(()=>{
           this.penalty += 1;
@@ -133,11 +143,15 @@ export class TimerComponent implements OnInit, DoCheck{
   }
 
   onChangePenaultyCheckbox(event) {
-    this.usePenaultyTime = event.checked;
-    if(!this.usePenaultyTime) {
+    this.chkboxPenaltyTime = event.checked;
+    if(!this.chkboxPenaltyTime) {
       clearInterval(this.penaltyTimer);
       this.penalty = 0;
     }
+  }
+
+  onChangeAutoTimerCheckbox(event){
+    this.chkboxAutoTimer = event.checked;
   }
 
   //TODO: Implement a max limit on penalty, otherwise it might go beyond 99 minutes

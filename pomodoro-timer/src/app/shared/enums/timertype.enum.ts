@@ -1,4 +1,4 @@
-export enum TimerType {
+export enum TimerTypeEnum {
     Regular,
     ShortBreak,
     LongBreak

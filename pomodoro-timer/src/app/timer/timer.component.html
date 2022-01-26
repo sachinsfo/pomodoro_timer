@@ -19,11 +19,20 @@
         </div>
     </div>
     <div class="row" style="padding: 10px;">
-        <div class="col-xs-12 text-center">
-            <mat-checkbox (change)="onChangePenaultyCheckbox($event)" [checked]="usePenaultyTime">
+        <div class="col-xs-4">
+            <app-timer-list></app-timer-list>
+        </div>
+        <div class="col-xs-2">
+            <mat-checkbox (change)="onChangePenaultyCheckbox($event)" [checked]="chkboxPenaltyTime">
                 Use penalty timer
             </mat-checkbox>
         </div>
+        <div class="col-xs-2">
+            <mat-checkbox (change)="onChangeAutoTimerCheckbox($event)" [checked]="chkboxAutoTimer">
+                Auto start next timer
+            </mat-checkbox>
+        </div>
+        <div class="col-xs-4"></div>
     </div>
     <div class="row">
         <div class="col-xs-2"></div>
@@ -53,5 +62,10 @@
         </div>
         <div class="col-xs-2"></div>
         <div class="col-xs-2"></div>
+    </div>
+    <div class="row" style="padding: 10px;">
+        <div class="col-xs-12">
+            <app-timer-item></app-timer-item>
+        </div>
     </div>
 </div>

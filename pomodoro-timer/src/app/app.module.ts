@@ -8,18 +8,26 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { TimerItemComponent } from './timer/timer-item/timer-item.component';
+import { TimerListComponent } from './timer/timer-list/timer-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TimerComponent
+    TimerComponent,
+    TimerItemComponent,
+    TimerListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     NoopAnimationsModule,
     MatSliderModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
