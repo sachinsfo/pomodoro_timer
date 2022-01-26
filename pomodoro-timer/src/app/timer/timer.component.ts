@@ -1,14 +1,18 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, DoCheck, ElementRef, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-timer',
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.css']
 })
-export class TimerComponent implements OnInit {
+export class TimerComponent implements OnInit, DoCheck{
   timer;
   @ViewChild('initialSetTime', {static: true})
   initialSetTimeMinutes: number = 25;
+
+  @ViewChild('timeTextValue', {static: true})
+  timeTextValue;
+  paragraphFontSize: string;
 
   @ViewChild('startButton', {static: true})
   startButton;
@@ -19,11 +23,20 @@ export class TimerComponent implements OnInit {
   minutes_minutes: number = Math.floor(this.current_time / 60);
   minutes_seconds: number = this.current_time % 60;
 
-  showStop: boolean = true;
-
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+
+  ngDoCheck(): void {
+    let mult = 6;
+    if(this.timeTextValue.value * mult < 25){
+      this.paragraphFontSize = 25 + 'px';
+    } 
+    else {
+      this.paragraphFontSize = (this.timeTextValue.value * mult) + 'px';
+    }
   }
 
   runTimer() {
