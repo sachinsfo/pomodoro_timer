@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { TimerTypeEnum } from 'src/app/shared/enums/timertype.enum';
 import { MatButtonModule } from '@angular/material/button';
+import { TimerObj } from 'src/app/shared/timer.model';
 
 @Component({
   selector: 'app-timer-item',
@@ -13,8 +14,13 @@ export class TimerItemComponent implements OnInit {
     'name': string,
     'value': number
   }[] = [];
-  selectedTimerType: number;
-  inputTimeValue: number;
+  selectedTimerType: number = 0;
+  inputTimeValue: number = 1;
+  @ViewChild('timeEntered')
+  timeEntered: ElementRef;
+
+  @Output()
+  newTimerItemEvent = new EventEmitter<TimerObj>();
 
   constructor() { }
 
@@ -31,6 +37,14 @@ export class TimerItemComponent implements OnInit {
     }
     this.selectedTimerType = 0;
     console.log(this.timerTypes);
+  }
+
+  onAddItem() {
+    let time_entered: number = parseInt(this.timeEntered.nativeElement.value);
+    if(time_entered <= 0) time_entered = 1;
+    if(time_entered > 99) time_entered = 99;
+    let newTimerObj: TimerObj = {type: this.selectedTimerType, time_in_min: time_entered, is_complete: false}
+    this.newTimerItemEvent.emit(newTimerObj);
   }
 
 }

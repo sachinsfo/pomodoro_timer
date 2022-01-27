@@ -1,1 +1,40 @@
-<p>timer-list works!</p> 
+<div class="row">
+    <div class="col-xs-12">
+        <h3 style="color: brown;">
+            Timer list
+        </h3>
+    </div>
+</div>
+<div class="row" *ngFor="let timer of timers; let timer_index = index;">
+    <div class="col-xs-2">
+        <mat-icon (click)="onDelete(timer_index, timer)" style="cursor: pointer;">delete</mat-icon>
+    </div>
+    <div class="col-xs-2 text-center">
+        {{getTimerName(timer.type)}}
+    </div>
+    <div class="col-xs-2 text-center">
+        {{timer.time_in_min}}
+    </div>
+    <div class="col-xs-2">
+        <div *ngIf="timer.is_complete">
+            <mat-icon>check_circle</mat-icon>
+        </div>
+        <div *ngIf="!timer.is_complete">
+            <mat-icon>highlight_off</mat-icon>
+        </div>
+    </div>
+    <div class="col-xs-2"></div>
+    <div class="col-xs-2"></div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        Total time = {{total_time_hrs | number:'2.0'}} hr {{ total_time_min | number:'2.0'}} min
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-8">
+        <button class="btn btn-info btn-block" (click)="loadActivity()" #btnLoadActivity>
+            Load activity
+        </button>
+    </div>
+</div>

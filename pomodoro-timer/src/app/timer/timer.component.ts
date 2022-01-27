@@ -1,7 +1,8 @@
-import { Component, DoCheck, ElementRef, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, DoCheck, ElementRef, EventEmitter, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { TimerObj } from '../shared/timer.model';
 import { TimerTypeEnum } from '../shared/enums/timertype.enum';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { TimerListComponent } from './timer-list/timer-list.component';
 @Component({
   selector: 'app-timer',
   templateUrl: './timer.component.html',
@@ -13,6 +14,10 @@ export class TimerComponent implements OnInit, DoCheck{
   penaltyTimer;
   chkboxPenaltyTime: boolean = false;
   chkboxAutoTimer: boolean = true;
+  showInstructions: boolean = false;
+  
+
+  @ViewChild(TimerListComponent) timerListChild: TimerListComponent;
 
   @ViewChild('initialSetTime', {static: true})
   initialSetTimeMinutes: number = 25;
@@ -27,6 +32,8 @@ export class TimerComponent implements OnInit, DoCheck{
   stopButton;
 
   timer_list: TimerObj[] = [];
+  // use to show completed icon - operately independently
+  num_of_timers_completed: number = 0;
 
   current_time_seconds: number = this.initialSetTimeMinutes * 60;
   minutes_minutes: number = Math.floor(this.current_time_seconds / 60);
@@ -36,10 +43,7 @@ export class TimerComponent implements OnInit, DoCheck{
 
   ngOnInit(): void {
     //TODO Calculate efficiency of the activity whenever penalty is used
-    //this.timer_list.push({type: TimerType.Regular, time_in_min: 0.3});
-    this.timer_list.push({type: TimerTypeEnum.Regular, time_in_min: 0.1});
-    this.timer_list.push({type: TimerTypeEnum.Regular, time_in_min: 0.2});
-    console.log(this.timer_list)
+    this.timer_list.push({type: TimerTypeEnum.Regular, time_in_min: 25, is_complete: false});
   }
 
 
@@ -62,10 +66,23 @@ export class TimerComponent implements OnInit, DoCheck{
 
   loadNextTimer() {
     if(this.timer_list.length > 0){
-      let newTimer = this.timer_list.pop();
+      let newTimer = this.timer_list.shift();
       this.current_time_seconds = newTimer.time_in_min * 60;
       this.updateTimer(this.current_time_seconds);
     }
+  }
+
+  loadNewActivity(event: TimerObj[]) {
+    // event.forEach(timer => {
+    //   timer.time_in_min = 0.2;
+    // });
+    this.timer_list = [...event];
+    this.loadFirstActivity(this.timer_list[0]);
+  }
+
+  loadFirstActivity(timer: TimerObj){
+    this.initialSetTimeMinutes = timer.time_in_min;
+    this.onSetTime();
   }
 
   onStart() {
@@ -91,9 +108,7 @@ export class TimerComponent implements OnInit, DoCheck{
   }
 
   onComplete() {
-    clearInterval(this.timer);
-    //this.current_time_seconds = 0;
-    console.log(this.chkboxAutoTimer, this.current_time_seconds, this.timer_list)
+    clearInterval(this.timer);    
     this.penalty = 0;
     if(this.chkboxAutoTimer){
       this.onStart();
@@ -103,6 +118,8 @@ export class TimerComponent implements OnInit, DoCheck{
       this.stopButton.nativeElement.disabled = true;
       this.startButton.nativeElement.disabled = false;
     }
+    this.num_of_timers_completed += 1;
+    this.timerListChild.timerComplete(this.num_of_timers_completed);
   }
 
   onStop() {
@@ -154,6 +171,15 @@ export class TimerComponent implements OnInit, DoCheck{
     this.chkboxAutoTimer = event.checked;
   }
 
+  newTimerAdded(event: TimerObj){
+    this.timerListChild.onAdd(event);
+  }
+
+  toggleShowHideInstructions(){
+    this.showInstructions = !this.showInstructions;
+  }
+
   //TODO: Implement a max limit on penalty, otherwise it might go beyond 99 minutes
+  //TODO: Add toastr notifications whenever penalty is added
 
 }

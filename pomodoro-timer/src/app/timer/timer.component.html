@@ -19,53 +19,55 @@
         </div>
     </div>
     <div class="row" style="padding: 10px;">
+        <div class="col-xs-12">
+            <app-timer-item (newTimerItemEvent)="newTimerAdded($event)"></app-timer-item>
+        </div>
+    </div>
+    <div class="row" style="padding: 10px;">
         <div class="col-xs-4">
-            <app-timer-list></app-timer-list>
+            <app-timer-list (loadActivityEmit)="loadNewActivity($event)"></app-timer-list>
         </div>
         <div class="col-xs-2">
             <mat-checkbox (change)="onChangePenaultyCheckbox($event)" [checked]="chkboxPenaltyTime">
                 Use penalty timer
             </mat-checkbox>
+            <button class="btn btn-primary btn-block" (click)="onStart()" #startButton>
+                Start
+            </button>
+            <!-- <input type="number" class="form-control" [(ngModel)]="initialSetTimeMinutes" step="1" pattern="\d+" value="1" placeholder="minutes"> -->
         </div>
         <div class="col-xs-2">
             <mat-checkbox (change)="onChangeAutoTimerCheckbox($event)" [checked]="chkboxAutoTimer">
                 Auto start next timer
             </mat-checkbox>
-        </div>
-        <div class="col-xs-4"></div>
-    </div>
-    <div class="row">
-        <div class="col-xs-2"></div>
-        <div class="col-xs-2"></div>
-        <div class="col-xs-2">
-            <button class="btn btn-primary btn-block" (click)="onStart()" #startButton>
-                Start
-            </button>
-        </div>
-        <div class="col-xs-2">
             <button class="btn btn-danger btn-block" 
                 (click)="onStop()" #stopButton disabled>
                 Stop
             </button>
+            <!-- <button class="btn btn-primary btn-block set_time" (click)="onSetTime()">Set Time!</button> -->
         </div>
-        <div class="col-xs-2"></div>
-        <div class="col-xs-2"></div>
+        <div class="col-xs-4">
+        </div>
     </div>
-    <div class="row" style="padding: 10px;">
-        <div class="col-xs-2"></div>
-        <div class="col-xs-2"></div>
-        <div class="col-xs-2">
-            <input type="number" class="form-control" [(ngModel)]="initialSetTimeMinutes" step="1" pattern="\d+" value="1" placeholder="minutes">
-        </div>
-        <div class="col-xs-2">
-            <button class="btn btn-primary btn-block set_time" (click)="onSetTime()">Set Time!</button>
-        </div>
-        <div class="col-xs-2"></div>
-        <div class="col-xs-2"></div>
-    </div>
-    <div class="row" style="padding: 10px;">
-        <div class="col-xs-12">
-            <app-timer-item></app-timer-item>
+    <div class="row">
+        <div class="col-xs-4"></div>
+        <div class="col-xs-8">
+            <p (click)="toggleShowHideInstructions()">Click to Show/Hide instructions</p>
+            <div *ngIf="showInstructions">
+                <ul>
+                    <li>You can use the default 25 minute timer by directly clicking the Start button</li>
+                    <li>For custom timers, select a type from the dropdown, key in your desired minutes into the input box and click add</li>
+                    <li>This will add your timers to an activity</li>
+                    <li>Add one or more timers to the activity</li>
+                    <li>Click trash icon to delete your timers from the activity</li>
+                    <li>Click 'Load activity' to load your timers sequentially into the main timer</li>
+                    <li>This will replace the default 25 minute timer with the first timer from your activity</li>
+                    <li>Click start to start your timers</li>
+                    <li>Use penalty timer: Tick this checkbox to add your 'away' time as penalty whenever you 'Stop' a timer</li>
+                    <li>Auto start next timer: If you uncheck this, you have to manually click start for each timer</li>
+                    <li>Note: Once you click 'Load activity', you cannot make any modifications to the timers.</li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

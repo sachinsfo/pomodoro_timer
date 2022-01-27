@@ -12,6 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { TimerItemComponent } from './timer/timer-item/timer-item.component';
 import { TimerListComponent } from './timer/timer-list/timer-list.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { TimerListComponent } from './timer/timer-list/timer-list.component';
     MatSliderModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
