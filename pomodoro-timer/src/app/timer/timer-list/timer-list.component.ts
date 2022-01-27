@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter, ViewChild } from '@angu
 import { TimerTypeEnum } from 'src/app/shared/enums/timertype.enum';
 import { TimerObj } from 'src/app/shared/timer.model';
 import { MatIconModule } from '@angular/material/icon';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-timer-list',
@@ -22,6 +23,7 @@ export class TimerListComponent implements OnInit {
   displayFileReadError: boolean = false;
   fileUploadSuccessful: boolean = false;
   file_uploaded_once: boolean = false;
+  file_name: string = '';
 
   total_time: number = 0;
   total_time_hrs: number = 0;
@@ -87,7 +89,15 @@ export class TimerListComponent implements OnInit {
   }
 
   saveActivity(){
-
+    let downloadTimersObj = {
+      "timers": this.timers
+    };
+    var blob = new Blob([JSON.stringify(downloadTimersObj)], {type: 'text/plain;charset=utf-8'});
+    if(!this.file_name){
+      this.file_name = Date.now().toString();
+    }
+    this.file_name = this.file_name.replace(/[^a-zA-Z0-9._]/g, '');
+    saveAs(blob, `${this.file_name}.txt`);
   }
 
   onFileUpload(fileList: FileList): void {

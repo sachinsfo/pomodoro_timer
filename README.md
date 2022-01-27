@@ -8,15 +8,15 @@ Instructions:
 - Use slider to increase or decrease the timer font-size
 
 2. Adding an activity - Single timer
-- Choose a dropdown of timer type, enter minutes and click Add
+- Choose a timer type from the dropdown, enter minutes and click Add
 - This will add a new timer to the activity (Timer list)
 - Click 'Load Activity' to load the timer into the main timer
 - Click 'Start' and 'Stop' to manage the timer
 
 3. Adding an activity - Multiple timers
-- Choose a dropdown of timer type, enter minutes and click Add
+- Choose a timer type from the dropdown, enter minutes and click Add
 - Repeat this as many time as you like
-- This will add a new timers to the activity (Timer list)
+- This will add new timers to the activity (Timer list)
 - Click 'Load Activity' to load all the timers into the main timer
 - Click 'Start' and 'Stop' to manage the timers
 
@@ -26,7 +26,8 @@ Instructions:
 - Click 'Load activity' and use timer as usual
 
 5. Save activity to a file
-- Click to save your existing activity to a file
+- Enter a prefered file name 
+- And click 'Save activity' to save your activity to a file to upload it later if needed
 
 6. Load activity
 - Click 'Load activity' to load the timers into the main timer
@@ -44,3 +45,6 @@ Instructions:
 
 10. Auto start next timer - Unchecked 
 - Manually start each timer after completion
+
+
+- by Sachin Chepuri (https://developr.dev)
