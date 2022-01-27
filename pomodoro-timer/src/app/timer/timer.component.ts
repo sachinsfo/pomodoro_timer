@@ -94,7 +94,6 @@ export class TimerComponent implements OnInit, DoCheck{
     else {
       clearInterval(this.penaltyTimer);
     }
-    console.log(this.timer_list)
     if(this.current_time_seconds > 0){
       this.current_time_seconds += this.penalty;
       this.timer = setInterval(() => {
@@ -133,7 +132,6 @@ export class TimerComponent implements OnInit, DoCheck{
         this.penalty = 1;
         this.penaltyTimer = setInterval(()=>{
           this.penalty += 1;
-          console.log(this.penalty)
         }, 1000);
       }
       else{

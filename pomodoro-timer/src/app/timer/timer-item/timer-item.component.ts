@@ -36,7 +36,6 @@ export class TimerItemComponent implements OnInit {
       this.timerTypes.push({'name': typeName, 'value': typeId});
     }
     this.selectedTimerType = 0;
-    console.log(this.timerTypes);
   }
 
   onAddItem() {

@@ -36,7 +36,6 @@ export class TimerListComponent implements OnInit {
 
   onAdd(newTimer){
     if(!this.btnLoadActivity.nativeElement.disabled){
-      newTimer.time_in_min = 0.1;
       this.timers.push(newTimer);
       this.getTotalTime();
     }    
