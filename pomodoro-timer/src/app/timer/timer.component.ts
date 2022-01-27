@@ -114,6 +114,7 @@ export class TimerComponent implements OnInit, DoCheck{
     }
     //when all timers are exhausted
     if(this.current_time_seconds === 0){
+      this.loadNextTimer();
       this.stopButton.nativeElement.disabled = true;
       this.startButton.nativeElement.disabled = false;
     }

@@ -28,7 +28,7 @@ export class TimerListComponent implements OnInit {
   getTotalTime() {
       this.total_time = 0;
       this.timers.forEach(t => {
-        this.total_time += t.time_in_min;
+        if(!t.is_complete) this.total_time += t.time_in_min;
       });
       this.total_time_hrs = Math.floor(this.total_time / 60);
       this.total_time_min = this.total_time % 60;
@@ -52,6 +52,7 @@ export class TimerListComponent implements OnInit {
         t += 1;
       }
     });
+    this.getTotalTime();
   }
 
   getTimerName(typeId: number){
