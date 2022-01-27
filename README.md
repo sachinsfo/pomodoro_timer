@@ -1,9 +1,11 @@
 # pomodoro_timer
 Customizable Pomodoro timer to track focus activities
 
+![sample image](https://i.ibb.co/256nPNy/Pomodoro-Timer-2022-01-27-07-53-57-2.png)
+
 Instructions:
 1. Slider
-- Use slider to increase or decrese the timer font-size
+- Use slider to increase or decrease the timer font-size
 
 2. Adding an activity - Single timer
 - Choose a dropdown of timer type, enter minutes and click Add
@@ -19,23 +21,26 @@ Instructions:
 - Click 'Start' and 'Stop' to manage the timers
 
 4. Upload an activity
-- Upload a json file of type {"timers": {"type": 0, "time_in_min": 1, "is_complete": false}}
+- Upload a json file of type {"timers": [{"type": 0, "time_in_min": 1, "is_complete": false}]}
 - This will automatically load all the timers as specified in your template
 - Click 'Load activity' and use timer as usual
 
 5. Save activity to a file
 - Click to save your existing activity to a file
 
-6. Use penalty timer - Checked 
+6. Load activity
+- Click 'Load activity' to load the timers into the main timer
+
+7. Use penalty timer - Checked 
 - When a timer is running and you clicked Stop, an internal timer will count the 'away' time
-- When you are back to focus and clicked Start, the 'away' will be re-added back to the original timer
+- When you are back to focus and clicked Start, the 'away' time will be re-added back to the original timer
 - (TBD) This will impact the efficiency calculation of your activity
 
-7. Use penalty timer - Unchecked
+8. Use penalty timer - Unchecked
 - No 'away' time is added whenever you stop the clock
 
-8. Auto start next timer - Checked
-- Runs through all timers in the activity are completed
+9. Auto start next timer - Checked
+- Runs through all the timers in the activity are exhausted
 
-9. Auto start next timer - Unchecked 
+10. Auto start next timer - Unchecked 
 - Manually start each timer after completion
