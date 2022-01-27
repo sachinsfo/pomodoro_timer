@@ -15,6 +15,7 @@ export class TimerComponent implements OnInit, DoCheck{
   chkboxPenaltyTime: boolean = false;
   chkboxAutoTimer: boolean = true;
   showInstructions: boolean = false;
+  activity_loaded: boolean = false;
   
 
   @ViewChild(TimerListComponent) timerListChild: TimerListComponent;
@@ -76,6 +77,7 @@ export class TimerComponent implements OnInit, DoCheck{
     // event.forEach(timer => {
     //   timer.time_in_min = 0.2;
     // });
+    this.activity_loaded = true;
     this.timer_list = [...event];
     this.loadFirstActivity(this.timer_list[0]);
   }

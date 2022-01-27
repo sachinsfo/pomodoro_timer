@@ -18,9 +18,9 @@
             <p [ngStyle]="{'font-size': paragraphFontSize}">{{minutes_minutes | number:'2.0'}}:{{minutes_seconds | number:'2.0'}}</p>
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="padding: 10px;">
         <div class="col-xs-12">
-            <app-timer-item (newTimerItemEvent)="newTimerAdded($event)"></app-timer-item>
+            <app-timer-item (newTimerItemEvent)="newTimerAdded($event)" *ngIf="!activity_loaded"></app-timer-item>
         </div>
     </div>
     <div class="row" style="padding: 10px;">
@@ -52,7 +52,7 @@
     <div class="row">
         <div class="col-xs-4"></div>
         <div class="col-xs-8">
-            <p (click)="toggleShowHideInstructions()">Toggle instructions</p>
+            <p (click)="toggleShowHideInstructions()">Click to Show/Hide instructions</p>
             <div *ngIf="showInstructions">
                 <ul>
                     <li>You can use the default 25 minute timer by directly clicking the Start button</li>
