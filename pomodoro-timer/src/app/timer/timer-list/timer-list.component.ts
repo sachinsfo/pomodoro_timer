@@ -15,6 +15,13 @@ export class TimerListComponent implements OnInit {
 
   @ViewChild('btnLoadActivity')
   btnLoadActivity;
+  activity_loaded: boolean = false;
+
+  uploaded_file_name: string = 'No file chosen';
+  file_content: string = '';
+  displayFileReadError: boolean = false;
+  fileUploadSuccessful: boolean = false;
+  file_uploaded_once: boolean = false;
 
   total_time: number = 0;
   total_time_hrs: number = 0;
@@ -34,9 +41,12 @@ export class TimerListComponent implements OnInit {
       this.total_time_min = this.total_time % 60;
   }
 
-  onAdd(newTimer){
-    if(!this.btnLoadActivity.nativeElement.disabled){
+  onAdd(newTimer: TimerObj){
+    // add only if the activity is not loaded
+    if(!this.activity_loaded){
+      //newTimer.time_in_min = 0.1;
       this.timers.push(newTimer);
+      console.log(this.timers)
       this.getTotalTime();
     }    
     else{
@@ -61,7 +71,7 @@ export class TimerListComponent implements OnInit {
 
   onDelete(timer_index: number, timer: TimerObj){
     // Can delete only if load activity is not clicked
-    if(!this.btnLoadActivity.nativeElement.disabled){
+    if(!this.activity_loaded){
       if(!timer.is_complete) this.timers.splice(timer_index, 1);
       this.getTotalTime();
     }    
@@ -73,6 +83,36 @@ export class TimerListComponent implements OnInit {
   loadActivity() {
     this.loadActivityEmit.emit(this.timers);
     this.btnLoadActivity.nativeElement.disabled = true;
+    this.activity_loaded = true;
+  }
+
+  saveActivity(){
+
+  }
+
+  onFileUpload(fileList: FileList): void {
+    let file = fileList[0];
+    let fileReader: FileReader = new FileReader();
+    fileReader.readAsText(file, "UTF-8");
+    let self = this;
+    fileReader.onloadend = (x) => {     
+      self.timers = JSON.parse(fileReader.result as string)['timers'];
+      // all timers are false when they are uploaded
+      self.timers.forEach(element => {
+        element.is_complete = false;
+        if(element.time_in_min <= 0) element.time_in_min = 1;
+        if(element.time_in_min > 99) element.time_in_min = 99;
+      });
+      self.getTotalTime();
+      this.file_uploaded_once = true;
+      this.fileUploadSuccessful = true;
+      this.displayFileReadError = false;
+    };
+    // TODO not working as expected
+    fileReader.onerror = (error) => {
+      self.displayFileReadError = true;
+      this.fileUploadSuccessful = false;
+    };
   }
 
 }
