@@ -45,6 +45,3 @@ Instructions:
 
 10. Auto start next timer - Unchecked 
 - Manually start each timer after completion
-
-
-- by Sachin Chepuri (https://developr.dev)
