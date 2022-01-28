@@ -48,7 +48,7 @@ export class TimerListComponent implements OnInit {
     if(!this.activity_loaded){
       //newTimer.time_in_min = 0.1;
       this.timers.push(newTimer);
-      console.log(this.timers)
+      //console.log(this.timers)
       this.getTotalTime();
     }    
     else{
