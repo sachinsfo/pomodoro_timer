@@ -3,6 +3,7 @@ import { TimerObj } from '../shared/timer.model';
 import { TimerTypeEnum } from '../shared/enums/timertype.enum';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TimerListComponent } from './timer-list/timer-list.component';
+import { get_minutes_seconds } from '../helpers/get_minutes_seconds';
 @Component({
   selector: 'app-timer',
   templateUrl: './timer.component.html',
@@ -63,8 +64,9 @@ export class TimerComponent implements OnInit, DoCheck{
   }
 
   updateTimer(new_time: number) {
-    this.minutes_minutes = Math.floor(this.current_time_seconds / 60);
-    this.minutes_seconds = this.current_time_seconds % 60;
+    let m: number[] = get_minutes_seconds(this.current_time_seconds);
+    this.minutes_minutes = m[0];
+    this.minutes_seconds = m[1];
 
   }
 

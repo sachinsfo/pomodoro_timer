@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { get_minutes_seconds } from './helpers/get_minutes_seconds';
 
 @Component({
   selector: 'app-root',
@@ -6,12 +8,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  public constructor(private titleService: Title) {}
+
   title = 'pomodoro-timer';
   background_color: string;
   color_timer;
   total: number;
   flag: boolean = true;
   seconds: number = 0;
+
+  setTitle(newTitle: string){
+    this.titleService.setTitle(newTitle);
+  }
 
   // set_frequency(freq: number, secondary_color: string = 'white'){
   //   // freq in milliseconds
@@ -41,6 +50,8 @@ export class AppComponent {
   
   seconds_remaining(seconds: number){
     this.seconds = seconds;
+    let current_time = get_minutes_seconds(this.seconds);
+    this.setTitle( current_time[0] + ':' + current_time[1]);
     if(seconds > 120) this.background_color = 'white';
     if(seconds === 0) this.background_color = 'red';
     else {
