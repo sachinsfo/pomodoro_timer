@@ -25,22 +25,41 @@ export class TimerListComponent implements OnInit {
   file_uploaded_once: boolean = false;
   file_name: string = '';
 
-  total_time: number = 0;
-  total_time_hrs: number = 0;
-  total_time_min: number = 0;
+  total_time_left: number = 0;
+  time_left_hrs: number = 0;
+  time_left_min: number = 0;
+  time_left_sec: number = 0;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  getTotalTime() {
-      this.total_time = 0;
-      this.timers.forEach(t => {
-        if(!t.is_complete) this.total_time += t.time_in_min;
-      });
-      this.total_time_hrs = Math.floor(this.total_time / 60);
-      this.total_time_min = this.total_time % 60;
+  calcTotalTimeLeft(seconds_remaining: number = 0) {
+      this.total_time_left = 0;
+      let flag: boolean = true;
+      if(this.activity_loaded){
+        for(var i=0; i<this.timers.length; i++){
+          let t: TimerObj = this.timers[i];
+          // first incomplete timer is the current timer
+          // So, seconds_remaining is the seconds_remaining of the current timer
+          if(!t.is_complete && flag){
+            this.total_time_left += Math.floor(seconds_remaining/60);
+            flag = false;
+          }
+          else if(!this.timers[i].is_complete){
+            this.total_time_left += t.time_in_min;
+          }
+        }
+      }
+      else {
+        this.timers.forEach(t => {
+          if(!t.is_complete) this.total_time_left += t.time_in_min;
+        });
+      }
+      this.time_left_hrs = Math.floor(this.total_time_left / 60);
+      this.time_left_min = this.total_time_left % 60;
+      this.time_left_sec = seconds_remaining % 60;
   }
 
   onAdd(newTimer: TimerObj){
@@ -49,7 +68,7 @@ export class TimerListComponent implements OnInit {
       //newTimer.time_in_min = 0.1;
       this.timers.push(newTimer);
       //console.log(this.timers)
-      this.getTotalTime();
+      this.calcTotalTimeLeft();
     }    
     else{
       //TODO: toastr notification
@@ -64,7 +83,7 @@ export class TimerListComponent implements OnInit {
         t += 1;
       }
     });
-    this.getTotalTime();
+    this.calcTotalTimeLeft();
   }
 
   getTimerName(typeId: number){
@@ -75,7 +94,7 @@ export class TimerListComponent implements OnInit {
     // Can delete only if load activity is not clicked
     if(!this.activity_loaded){
       if(!timer.is_complete) this.timers.splice(timer_index, 1);
-      this.getTotalTime();
+      this.calcTotalTimeLeft();
     }    
     else{
       //TODO: toastr notification
@@ -113,7 +132,7 @@ export class TimerListComponent implements OnInit {
         if(element.time_in_min <= 0) element.time_in_min = 1;
         if(element.time_in_min > 99) element.time_in_min = 99;
       });
-      self.getTotalTime();
+      self.calcTotalTimeLeft();
       this.file_uploaded_once = true;
       this.fileUploadSuccessful = true;
       this.displayFileReadError = false;

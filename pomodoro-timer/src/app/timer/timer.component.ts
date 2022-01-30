@@ -107,6 +107,7 @@ export class TimerComponent implements OnInit, DoCheck{
         this.current_time_seconds -= 1;
         this.updateTimer(this.current_time_seconds);
         this.seconds_remaining_event.emit(this.current_time_seconds);
+        this.timerListChild.calcTotalTimeLeft(this.current_time_seconds);
         if(this.current_time_seconds === 0) this.onComplete();
       }, 1000);
     }
