@@ -1,5 +1,6 @@
 export enum TimerTypeEnum {
     Regular,
     ShortBreak,
-    LongBreak
+    LongBreak,
+    Warmup
 }
