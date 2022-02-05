@@ -4,10 +4,10 @@ const path = require("path");
 
 const app = express();
 
-app.use(express.static(__dirname + "/dist/pomodoro_timer"));
+app.use(express.static(__dirname + "../pomodoro_timer"));
 
 app.get("/*", function (req, res) {
-  const fullPath = path.join(__dirname + "/dist/pomodoro_timer/index.html");
+  const fullPath = path.join(__dirname + "../pomodoro_timer/index.html");
   console.log(" Fetching from.." + fullPath);
   res.sendFile(fullPath);
 });
