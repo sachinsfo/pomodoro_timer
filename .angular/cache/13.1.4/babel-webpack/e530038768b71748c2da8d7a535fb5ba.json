@@ -1,0 +1,1 @@
+{"ast":null,"code":"export function get_minutes_seconds(current_time_seconds) {\n  let minutes_minutes = Math.floor(current_time_seconds / 60);\n  let minutes_seconds = current_time_seconds % 60;\n  return [minutes_minutes, minutes_seconds];\n}","map":null,"metadata":{},"sourceType":"module"}
