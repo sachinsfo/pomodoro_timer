@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-xs-4">
+    </div>
+    <div class="col-xs-2">
+            <select class="form-control" [(ngModel)]="selectedTimerType">
+                <option *ngFor="let tt of timerTypes" [value]="tt.value">
+                    {{tt.name}}
+                </option>
+            </select>
+    </div>
+    <div class="col-xs-2">
+        <input type="number" class="form-control" [(ngModel)]="inputTimeValue" step="1" pattern="\d+" value="1" placeholder="minutes" #timeEntered>
+    </div>
+    <div class="col-xs-4">
+        <button class="btn btn-primary" (click)="onAddItem()">
+            Add
+        </button>
+    </div>
+</div>

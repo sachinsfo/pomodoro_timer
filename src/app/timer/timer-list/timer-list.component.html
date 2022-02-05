@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-xs-12">
+        <h3 style="color: brown;">
+            Timer list
+        </h3>
+    </div>
+</div>
+<div class="row" style="padding: 10px;">
+    <div class="col-xs-8">
+        <label for="uploadFile">Upload activity</label>
+        <input name="uploadFile" type="file" (change)="onFileUpload($event.target.files)" [disabled]="activity_loaded || file_uploaded_once">
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-8">
+        <div style="color: green;" *ngIf="fileUploadSuccessful">File upload successful</div>
+        <div style="color: red;" *ngIf="displayFileReadError">Unable to read the file</div>
+    </div>
+</div>
+<div class="row" *ngFor="let timer of timers; let timer_index = index;">
+    <div class="col-xs-2">
+        <mat-icon (click)="onDelete(timer_index, timer)" style="cursor: pointer;">delete</mat-icon>
+    </div>
+    <div class="col-xs-2 text-center">
+        {{getTimerName(timer.type)}}
+    </div>
+    <div class="col-xs-2 text-center">
+        {{timer.time_in_min}}m
+    </div>
+    <div class="col-xs-2">
+        <div *ngIf="timer.is_complete">
+            <mat-icon>check_circle</mat-icon>
+        </div>
+        <div *ngIf="!timer.is_complete">
+            <mat-icon>highlight_off</mat-icon>
+        </div>
+    </div>
+    <div class="col-xs-2"></div>
+    <div class="col-xs-2"></div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        Time left = {{time_left_hrs | number:'2.0'}} hr {{ time_left_min | number:'2.0'}} min {{ time_left_sec | number:'2.0'}} sec
+    </div>
+</div>
+<div class="row" style="padding: 10px;">
+    <div class="col-xs-8">
+        <button class="btn btn-info btn-block" (click)="loadActivity()" #btnLoadActivity>
+            Load activity
+        </button>
+    </div>
+</div>
+<div class="row" style="padding: 10px;">
+    <div class="col-xs-8">
+        <label for="file_name">File name</label>
+        <input type="text" [(ngModel)]="file_name">&nbsp;.txt
+        <br><br>
+        <button style="padding: 10px;" class="btn btn-info btn-block" (click)="saveActivity()" #btnSaveActivity>
+            Save activity to a file
+        </button>
+    </div>
+</div>
