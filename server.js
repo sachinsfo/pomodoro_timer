@@ -4,20 +4,19 @@ const path = require("path");
 
 const app = express();
 
-// app.use(express.static(__dirname + "./pomodoro_timer"), function () {
-//   console.log(`dname: ${__dirname}/pomodoro_timer`);
-// });
+app.use(express.static(__dirname + "/dist/pomodoro_timer"));
 
-// app.get("/*", function (req, res) {
-//   res.sendFile(path.join(__dirname + "/pomodoro_timer/index.html"));
-//   console.log(`directory name: ${__dirname}/pomodoro_timer/index.html`);
-// });
+app.get("/*", function (req, res) {
+  const fullPath = path.join(__dirname + "/dist/pomodoro_timer/index.html");
+  console.log(" Fetching from.." + fullPath);
+  res.sendFile(fullPath);
+});
 
-app.use(express.static("./dist/pomodoro_timer"));
+// app.use(express.static("./dist/pomodoro_timer"));
 
-app.get("/*", (req, res) =>
-  res.sendFile("index.html", { root: "dist/pomodoro_timer" })
-);
+// app.get("/*", (req, res) =>
+//   res.sendFile("index.html", { root: "dist/pomodoro_timer" })
+// );
 
 app.listen(process.env.PORT || 3000, function () {
   console.log(
@@ -26,5 +25,7 @@ app.listen(process.env.PORT || 3000, function () {
     app.settings.env
   );
 });
+
+console.log("Server started... :)");
 
 //app.listen(process.env.PORT || 8080);
