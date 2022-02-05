@@ -45,28 +45,70 @@
                 Stop
             </button>
             <!-- <button class="btn btn-primary btn-block set_time" (click)="onSetTime()">Set Time!</button> -->
+            
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4">            
         </div>
     </div>
     <div class="row">
         <div class="col-xs-4"></div>
-        <div class="col-xs-8">
+        <div class="col-xs-4">
             <p (click)="toggleShowHideInstructions()">Click to Show/Hide instructions</p>
+        </div>
+        <div class="col-xs-4"></div>
+    </div>
+    <div class="row" style="padding: 10px;">
+        <div class="col-xs-12">
+            
             <div *ngIf="showInstructions">
-                <ul>
-                    <li>You can use the default 25 minute timer by directly clicking the Start button</li>
-                    <li>For custom timers, select a type from the dropdown, key in your desired minutes into the input box and click add</li>
-                    <li>This will add your timers to an activity</li>
-                    <li>Add one or more timers to the activity</li>
-                    <li>Click trash icon to delete your timers from the activity</li>
-                    <li>Click 'Load activity' to load your timers sequentially into the main timer</li>
-                    <li>This will replace the default 25 minute timer with the first timer from your activity</li>
-                    <li>Click start to start your timers</li>
-                    <li>Use penalty timer: Tick this checkbox to add your 'away' time as penalty whenever you 'Stop' a timer</li>
-                    <li>Auto start next timer: If you uncheck this, you have to manually click start for each timer</li>
-                    <li>Note: Once you click 'Load activity', you cannot make any modifications to the timers.</li>
-                </ul>
+                <pre>
+                    ~Instructions~
+1. Slider
+- Use slider to increase or decrease the timer font-size
+
+2. Adding an activity - Single timer
+- Choose a timer type from the dropdown, enter minutes and click Add
+- This will add a new timer to the activity (Timer list)
+- Click 'Load Activity' to load the timer into the main timer
+- Click 'Start' and 'Stop' to manage the timer
+
+3. Adding an activity - Multiple timers
+- Choose a timer type from the dropdown, enter minutes and click Add
+- Repeat this as many time as you like
+- This will add new timers to the activity (Timer list)
+- Click 'Load Activity' to load all the timers into the main timer
+- Click 'Start' and 'Stop' to manage the timers
+
+4. Upload an activity
+- Upload a .txt file of type {{json_type}}                    
+- This will automatically load all the timers as specified in your template
+- Click 'Load activity' and use timer as usual
+
+5. Save activity to a file
+- Enter a prefered file name 
+- And click 'Save activity' to save your activity to a file,
+  to upload it later if needed
+
+6. Load activity
+- Click 'Load activity' to load the timers into the main timer
+
+7. Use penalty timer - Checked 
+- When a timer is running and you clicked Stop, 
+  an internal timer will count the 'away' time
+- When you are back to focus and clicked Start, 
+  the 'away' time will be re-added back to the original timer
+- (TBD) This will impact the efficiency calculation of your activity
+
+8. Use penalty timer - Unchecked
+- No 'away' time is added whenever you stop the clock
+
+9. Auto start next timer - Checked
+- Runs through all the timers in the activity are exhausted
+
+10. Auto start next timer - Unchecked 
+- Manually start each timer after completion
+                    
+                </pre>
             </div>
         </div>
     </div>

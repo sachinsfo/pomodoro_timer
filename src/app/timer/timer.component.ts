@@ -18,6 +18,8 @@ export class TimerComponent implements OnInit, DoCheck{
   showInstructions: boolean = false;
   activity_loaded: boolean = false;
 
+  json_type: string = '{"timers": [{"type": 0, "time_in_min": 1, "is_complete": false}]}';
+
   @Output()
   seconds_remaining_event = new EventEmitter<number>();
   
