@@ -12,11 +12,9 @@ const app = express();
 //   res.sendFile(fullPath);
 // });
 
-app.use(express.static("./dist/pomodoro_timer"));
+app.use(express.static("./dist"));
 
-app.get("/*", (req, res) =>
-  res.sendFile("index.html", { root: "dist/pomodoro_timer" })
-);
+app.get("/*", (req, res) => res.sendFile("index.html", { root: "dist" }));
 
 app.listen(process.env.PORT || 8080, function () {
   console.log(
