@@ -4,6 +4,7 @@ import { TimerTypeEnum } from '../shared/enums/timertype.enum';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TimerListComponent } from './timer-list/timer-list.component';
 import { get_minutes_seconds } from '../helpers/get_minutes_seconds';
+import { DeviceDetectorService } from 'ngx-device-detector';
 @Component({
   selector: 'app-timer',
   templateUrl: './timer.component.html',
@@ -45,12 +46,21 @@ export class TimerComponent implements OnInit, DoCheck{
   current_time_seconds: number = this.initialSetTimeMinutes * 60;
   minutes_minutes: number = Math.floor(this.current_time_seconds / 60);
   minutes_seconds: number = this.current_time_seconds % 60;
+
+  isUserDeviceMobile: boolean;
+  mat_slider_default_value: number = 30;
   
-  constructor() { }
+  constructor(private deviceDetectorService: DeviceDetectorService) { }
 
   ngOnInit(): void {
     //TODO Calculate efficiency of the activity whenever penalty is used
     this.timer_list.push({type: TimerTypeEnum.Regular, time_in_min: 25, is_complete: false});
+    this.isUserDeviceMobile = this.deviceDetectorService.isMobile();
+    if(this.isUserDeviceMobile) this.mat_slider_default_value = 25;
+    // console.log(this.deviceDetectorService.getDeviceInfo());
+    // console.log(this.deviceDetectorService.isMobile());
+    // console.log(this.deviceDetectorService.isTablet());
+    // console.log(this.deviceDetectorService.isDesktop());
   }
 
 
