@@ -10,7 +10,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.css']
 })
-export class TimerComponent implements OnInit, DoCheck{
+export class TimerComponent implements OnInit, DoCheck {
   timer;
   penalty: number = 0;
   penaltyTimer;
@@ -48,7 +48,6 @@ export class TimerComponent implements OnInit, DoCheck{
   minutes_seconds: number = this.current_time_seconds % 60;
 
   isUserDeviceMobile: boolean;
-  mat_slider_default_value: number = 30;
   
   constructor(private deviceDetectorService: DeviceDetectorService) { }
 
@@ -56,8 +55,8 @@ export class TimerComponent implements OnInit, DoCheck{
     //TODO Calculate efficiency of the activity whenever penalty is used
     this.timer_list.push({type: TimerTypeEnum.Regular, time_in_min: 25, is_complete: false});
     this.isUserDeviceMobile = this.deviceDetectorService.isMobile();
-    if(this.isUserDeviceMobile) this.mat_slider_default_value = 25;
-    // console.log(this.deviceDetectorService.getDeviceInfo());
+    if(this.isUserDeviceMobile) this.paragraphFontSize = '15px';
+    //  console.log(this.deviceDetectorService.getDeviceInfo());
     // console.log(this.deviceDetectorService.isMobile());
     // console.log(this.deviceDetectorService.isTablet());
     // console.log(this.deviceDetectorService.isDesktop());
