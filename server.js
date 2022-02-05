@@ -12,11 +12,18 @@ const app = express();
 //   res.sendFile(fullPath);
 // });
 
-app.use(express.static("./dist/pomodoro_timer"));
+// app.use(express.static("./dist/pomodoro_timer"));
 
-app.get("/*", (req, res) =>
-  res.sendFile("index.html", { root: "dist/pomodoro_timer" })
-);
+// app.get("/*", (req, res) =>
+//   res.sendFile("index.html", { root: "dist/pomodoro_timer" })
+// );
+
+if (process.env.NODE_ENV) {
+  app.use(express.static(path.resolve(process.cwd(), "pomodoro_timer")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(process.cwd(), "pomodoro_timer/index.html"));
+  });
+}
 
 app.listen(process.env.PORT || 8080, function () {
   console.log(
