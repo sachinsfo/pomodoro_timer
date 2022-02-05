@@ -1,33 +1,33 @@
-<div class="container">
+<div class="container-fluid">
     <!-- <div class="row">
-        <div class="col-xs-4"></div>
-        <div class="col-xs-4 text-center">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 text-center">
             <h1>TIME</h1>
         </div>
-        <div class="col-xs-4"></div>
+        <div class="col-sm-4"></div>
     </div> -->
     <div class="row">
-        <div class="col-xs-4"></div>
-        <div class="col-xs-4 text-center">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 text-center">
             <mat-slider min="1" max="100" step="1" value="30" #timeTextValue></mat-slider>
         </div>
-        <div class="col-xs-4"></div>
+        <div class="col-sm-4"></div>
     </div>
     <div class="row">
-        <div class="col-xs-12 text-center">
+        <div class="col-sm-12 text-center">
             <p [ngStyle]="{'font-size': paragraphFontSize}">{{minutes_minutes | number:'2.0'}}:{{minutes_seconds | number:'2.0'}}</p>
         </div>
     </div>
     <div class="row" style="padding: 10px;">
-        <div class="col-xs-12">
+        <div class="col-sm-12">
             <app-timer-item (newTimerItemEvent)="newTimerAdded($event)" *ngIf="!activity_loaded"></app-timer-item>
         </div>
     </div>
     <div class="row" style="padding: 10px;">
-        <div class="col-xs-4">
+        <div class="col-sm-4">
             <app-timer-list (loadActivityEmit)="loadNewActivity($event)"></app-timer-list>
         </div>
-        <div class="col-xs-2">
+        <div class="col-sm-2">
             <mat-checkbox (change)="onChangePenaultyCheckbox($event)" [checked]="chkboxPenaltyTime">
                 Use penalty timer
             </mat-checkbox>
@@ -36,7 +36,7 @@
             </button>
             <!-- <input type="number" class="form-control" [(ngModel)]="initialSetTimeMinutes" step="1" pattern="\d+" value="1" placeholder="minutes"> -->
         </div>
-        <div class="col-xs-2">
+        <div class="col-sm-2">
             <mat-checkbox (change)="onChangeAutoTimerCheckbox($event)" [checked]="chkboxAutoTimer">
                 Auto start next timer
             </mat-checkbox>
@@ -47,18 +47,18 @@
             <!-- <button class="btn btn-primary btn-block set_time" (click)="onSetTime()">Set Time!</button> -->
             
         </div>
-        <div class="col-xs-4">            
+        <div class="col-sm-4">            
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-4"></div>
-        <div class="col-xs-4">
-            <p (click)="toggleShowHideInstructions()">Click to Show/Hide instructions</p>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <p (click)="toggleShowHideInstructions()" style="cursor: pointer;">Click to Show/Hide instructions</p>
         </div>
-        <div class="col-xs-4"></div>
+        <div class="col-sm-4"></div>
     </div>
     <div class="row" style="padding: 10px;">
-        <div class="col-xs-12">
+        <div class="col-sm-12">
             
             <div *ngIf="showInstructions">
                 <pre>

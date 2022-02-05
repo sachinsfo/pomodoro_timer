@@ -53,9 +53,15 @@ export class TimerListComponent implements OnInit {
         }
       }
       else {
-        this.timers.forEach(t => {
-          if(!t.is_complete) this.total_time_left += t.time_in_min;
-        });
+        // when default 25 minute timer is started without loading the activity
+        if(this.timers.length == 0){
+          this.total_time_left = Math.floor(seconds_remaining/60);
+        }
+        else{
+          this.timers.forEach(t => {
+            if(!t.is_complete) this.total_time_left += t.time_in_min;
+          });
+        }
       }
       this.time_left_hrs = Math.floor(this.total_time_left / 60);
       this.time_left_min = this.total_time_left % 60;
