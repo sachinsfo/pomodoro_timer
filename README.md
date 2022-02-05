@@ -1,7 +1,7 @@
 # pomodoro_timer
 Customizable Pomodoro timer to track focus activities
 
-![sample image](https://i.ibb.co/hCC368T/Pomodoro-Timer-2022-01-27-19-40-06-1.png)
+![sample image](https://i.ibb.co/hCC368T/pomodoro_timer-2022-01-27-19-40-06-1.png)
 
 Instructions:
 1. Slider

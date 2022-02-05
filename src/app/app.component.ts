@@ -11,7 +11,7 @@ export class AppComponent {
 
   public constructor(private titleService: Title) {}
 
-  title = 'pomodoro-timer';
+  title = 'pomodoro_timer';
   background_color: string;
   color_timer;
   total: number;

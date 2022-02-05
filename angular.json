@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "pomodoro-timer": {
+    "pomodoro_timer": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -16,7 +16,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/pomodoro-timer",
+            "outputPath": "dist/pomodoro_timer",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "pomodoro-timer:build:production"
+              "browserTarget": "pomodoro_timer:build:production"
             },
             "development": {
-              "browserTarget": "pomodoro-timer:build:development"
+              "browserTarget": "pomodoro_timer:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pomodoro-timer:build"
+            "browserTarget": "pomodoro_timer:build"
           }
         },
         "test": {
@@ -104,5 +104,5 @@
       }
     }
   },
-  "defaultProject": "pomodoro-timer"
+  "defaultProject": "pomodoro_timer"
 }
