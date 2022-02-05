@@ -104,12 +104,15 @@ export class TimerComponent implements OnInit, DoCheck {
   }
 
   onStart() {
+
+    //TODO You should not pop a new timer each time start is clicked, it should restart the timer
+
     // if penalty is zero that means clock is stopped by the user 
     // Otherwise, the timer is complete
-    if(this.penalty === 0){
+    if(this.penalty === 0 && this.current_time_seconds == 0){
       this.loadNextTimer();
     }
-    else {
+    if(this.penalty !== 0) {
       clearInterval(this.penaltyTimer);
     }
     if(this.current_time_seconds > 0){
