@@ -48,6 +48,7 @@ export class TimerComponent implements OnInit, DoCheck {
   minutes_seconds: number = this.current_time_seconds % 60;
 
   isUserDeviceMobile: boolean;
+  is_first_click_on_start: number = 0;
   
   constructor(private deviceDetectorService: DeviceDetectorService) { }
 
@@ -104,14 +105,14 @@ export class TimerComponent implements OnInit, DoCheck {
   }
 
   onStart() {
-
-    //TODO You should not pop a new timer each time start is clicked, it should restart the timer
-
     // if penalty is zero that means clock is stopped by the user 
     // Otherwise, the timer is complete
-    if(this.penalty === 0 && this.current_time_seconds == 0){
+    this.is_first_click_on_start += 1;
+    if(this.penalty === 0 && this.current_time_seconds === 0){
+      // You should not pop a new timer each time start is clicked, instead, it should restart the existing timer
       this.loadNextTimer();
     }
+    if(this.is_first_click_on_start == 1) this.loadNextTimer();
     if(this.penalty !== 0) {
       clearInterval(this.penaltyTimer);
     }
