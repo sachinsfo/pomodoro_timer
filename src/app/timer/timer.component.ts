@@ -95,7 +95,11 @@ export class TimerComponent implements OnInit, DoCheck {
     //   timer.time_in_min = 0.2;
     // });
     this.activity_loaded = true;
-    this.timer_list = [...event];
+    this.timer_list = [];
+    event.forEach(t => {
+      if(!t.is_complete) this.timer_list.push(t);
+    });
+    //this.timer_list = [...event];
     this.loadFirstActivity(this.timer_list[0]);
   }
 
