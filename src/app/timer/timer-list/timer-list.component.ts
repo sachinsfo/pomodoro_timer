@@ -135,7 +135,7 @@ export class TimerListComponent implements OnInit {
       // all timers are false when they are uploaded
       self.timers.forEach(element => {
         //TODO If you were to remove this line, then make sure you pop off all completed timers from the list
-        element.is_complete = false;
+        // element.is_complete = false;
         if(element.time_in_min < 0) element.time_in_min = 1;
         if(element.time_in_min > 99) element.time_in_min = 99;
       });
